@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+
+</head>
+<body>
+  <main>  <!-- Rating state start -->
+  <div id="rating-select-box" class="rating-card">
+
+  <button class="rating-button">
+    <img src="images/icon-star.svg" />
+  </button>
+
+  <h1>How did we do?</h1>
+
+  <p>Please let us know how we did with your support request. All feedback is appreciated 
+  to help us improve our offering!</p>
+
+  <div class="rating-buttons">
+    <button class="rating-button rating-button-number">1</button>
+    <button class="rating-button rating-button-number">2</button>
+    <button class="rating-button rating-button-number">3</button>
+    <button class="rating-button rating-button-number">4</button>
+    <button class="rating-button rating-button-number">5</button>
+  </div>
+
+  <button id="submit-button">Submit</button>
+
+  </div>
+  <!-- Rating state end -->
+
+  <!-- Thank you state start -->
+  <div class="rating-card thank-you-card" id="thank-you-box">
+    <img src="images/illustration-thank-you.svg" />
+    <div id="rating-selected">You selected <span id="actual-rating"></span> out of 5</div>
+
+    <h1>Thank you!</h1>
+  
+    <p>We appreciate you taking the time to give a rating. If you ever need more support, 
+    don’t hesitate to get in touch!</p>
+  </div> 
+  <!-- Thank you state end -->
+</main>
+
+<script>
+  function clearActive(buttons) {
+    buttons.forEach(el => {
+      el.classList.remove("active");
+    })
+  }
+  var selected_number = "";
+  var rating_buttons = document.querySelectorAll(".rating-buttons button");
+ 
+  rating_buttons.forEach(el => {
+    el.addEventListener('click', function() {
+      clearActive(rating_buttons);
+      selected_number = el.innerHTML;
+      el.classList.add('active');
+    });
+  });
+
+  var submit_button = document.querySelector("#submit-button");
+  submit_button.addEventListener('click', function() {
+    document.getElementById("rating-select-box").style.display = "none"; 
+    document.getElementById("thank-you-box").style.display = "block"; 
+    document.getElementById("actual-rating").innerHTML = selected_number;
+  });
+</script>
+
+</body>
+</html>
